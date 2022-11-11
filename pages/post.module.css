@@ -24,12 +24,15 @@
 }
 
 .name {
-  font-size: 36px;
+  font-size: 100px;
+  text-align: center;
+
 }
 
 .back {
   display: inline-block;
   margin-bottom: 20px;
+  color: var(--textcolor)
 }
 
 .bold {
@@ -107,4 +110,16 @@
   .pre {
     background-color: rgb(15, 8, 28);
   }
+}
+
+
+.headerLinks {
+  margin-right: 2em;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--textcolor)
+}
+
+.header { 
+  margin-bottom: 50px;
 }
