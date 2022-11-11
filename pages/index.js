@@ -4,6 +4,8 @@ import { getDatabase } from "../lib/notion";
 import { Text } from "./[slug].js";
 import styles from "./index.module.css";
 import ThemeToggle from "../components/ThemeToggle";
+import { Hamburger } from "../components/Hamburger";
+import { useRef, useState } from "react";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
 
@@ -26,22 +28,28 @@ export const pages = [
     },
 ];
 export default function Home({ posts }) {
+    const headerLinksRef = useRef();
+    const [menuVisible, setMenuVisible] = useState(true);
     return (
         <div>
             <Head>
                 <title>Notion Next.js blog</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <header
-                className={styles.container}
-                style={{
-                    marginTop: "1.5em",
-                    marginBottom: "1em",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                }}
-            >
+            <div className={styles.iconHamburger}>
+                <button
+                    href=""
+                    onClick={() => {
+                        headerLinksRef.current.style.display = menuVisible
+                            ? "flex"
+                            : "none";
+                        setMenuVisible(!menuVisible);
+                    }}
+                >
+                    <Hamburger />
+                </button>
+            </div>
+            <header ref={headerLinksRef} className={styles.topHeader}>
                 {pages.map((e) => (
                     <a className={styles.headerLinks} href={e.path}>
                         {e.name}
@@ -50,10 +58,7 @@ export default function Home({ posts }) {
                 <ThemeToggle />
             </header>
             <main className={styles.container}>
-                <header
-                    
-                    className={styles.header}
-                >
+                <header className={styles.header}>
                     <div data-aos="fade-up" className={styles.logos}>
                         <img
                             src="photo with armadilo.jpg"
@@ -62,16 +67,25 @@ export default function Home({ posts }) {
                             style={{ margin: "auto" }}
                         />
                     </div>
-                    <h1 data-aos="fade-up"
-                    data-aos-delay="300" style={{ fontSize: 40, textAlign: "center" }}>
+                    <h1
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                        style={{ fontSize: 40, textAlign: "center" }}
+                    >
                         Hi, I'm Daniel
                     </h1>
-                    <p data-aos="fade-up"
-                    data-aos-delay="300" style={{ fontWeight: "bold", fontSize: '1.2em' }}>
+                    <p
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                        style={{ fontWeight: "bold", fontSize: "1.2em" }}
+                    >
                         I love building stuffs, that's just who I am.
                     </p>
-                    <p data-aos="fade-up"
-                    data-aos-delay="300" style={{fontSize: '1.2em'}}>
+                    <p
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                        style={{ fontSize: "1.2em" }}
+                    >
                         This is a portal made for you to know more about me.
                         Here I regularly post my latest projects and
                         shenanigans.
@@ -83,7 +97,7 @@ export default function Home({ posts }) {
                     data-aos-delay="600"
                     className={styles.heading}
                 >
-                  Projects
+                    Projects
                 </h2>
                 <ol
                     data-aos="fade-up"
@@ -91,7 +105,9 @@ export default function Home({ posts }) {
                     className={styles.posts}
                 >
                     {posts.map((post) => {
-                        const slug = post.properties.Name.title[0].plain_text.replaceAll(' ', '-').toLowerCase()
+                        const slug = post.properties.Name.title[0].plain_text
+                            .replaceAll(" ", "-")
+                            .toLowerCase();
                         const date = new Date(
                             post.last_edited_time
                         ).toLocaleString("en-US", {

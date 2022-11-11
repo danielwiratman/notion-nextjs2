@@ -14,12 +14,14 @@ body {
 body[data-theme="light"] {
   background-color: white;
   color: black;
-  --textcolor: black
+  --textcolor: black;
+  --backcolor: white;
 }
 body[data-theme="dark"] {
   background-color: rgb(24, 24, 31);
   color: rgb(238, 238, 238);
   --textcolor: rgb(238, 238, 238)
+  --backcolor: rgb(24, 24, 31)
 }
 /* 
 @media (prefers-color-scheme: dark) {

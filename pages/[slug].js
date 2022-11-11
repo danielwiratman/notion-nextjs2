@@ -1,10 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useRef, useState } from "react";
 import Head from "next/head";
 import { getDatabase, getPage, getBlocks } from "../lib/notion";
 import Link from "next/link";
 import { databaseId, pages } from "./index.js";
 import styles from "./post.module.css";
 import ThemeToggle from "../components/ThemeToggle";
+import { Hamburger } from "../components/Hamburger";
 
 export const Text = ({ text }) => {
     if (!text) {
@@ -183,22 +184,27 @@ export default function Post({ page, blocks }) {
     if (!page || !blocks) {
         return <div />;
     }
+    const headerLinksRef = useRef();
+    const [menuVisible, setMenuVisible] = useState(true);
     return (
         <div>
             <Head>
                 <title>{page.properties.Name.title[0].plain_text}</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <header
-                className={styles.container}
-                style={{
-                    marginTop: "1.5em",
-                    marginBottom: "1em",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                }}
-            >
+            <div className={styles.iconHamburger}>
+                <button
+                    onClick={() => {
+                        headerLinksRef.current.style.display = menuVisible
+                            ? "flex"
+                            : "none";
+                        setMenuVisible(!menuVisible);
+                    }}
+                >
+                    <Hamburger />
+                </button>
+            </div>
+            <header ref={headerLinksRef} className={styles.topHeader}>
                 {pages.map((e) => (
                     <a className={styles.headerLinks} href={e.path}>
                         {e.name}
