@@ -49,6 +49,7 @@
     display: block;
   }
   .topHeader {
+    margin-top: 0;
     display:none;
     flex-direction: column;
     margin-bottom: -.6em;
