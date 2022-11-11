@@ -9,6 +9,7 @@ body {
 
 body {
   transition: background-color 400ms;
+  
 }
 
 body[data-theme="light"] {
@@ -63,4 +64,10 @@ h1 {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #aaa;
+}
+
+@media (max-width: 600px){
+  ::-webkit-scrollbar {
+   display: none
+  }
 }

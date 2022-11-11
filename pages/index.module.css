@@ -32,7 +32,6 @@
 .iconHamburger {
   display: none;
   margin-top: 1.5em;
-  margin-bottom: 1em;
 }
 
 .iconHamburger button {
@@ -41,7 +40,8 @@
   display: block;
   margin: auto;
   background-color: var(--backcolor);
-  color: var(--textcolor)
+  color: var(--textcolor);
+  transition: background-color 400ms;
 }
 
 @media (max-width: 600px){
@@ -49,7 +49,6 @@
     display: block;
   }
   .topHeader {
-    margin-top: 0;
     display:none;
     flex-direction: column;
     margin-bottom: -.6em;

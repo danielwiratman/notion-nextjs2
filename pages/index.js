@@ -93,6 +93,7 @@ export default function Home({ posts }) {
                 </header>
 
                 <h2
+                    id="projects"
                     data-aos="fade-up"
                     data-aos-delay="600"
                     className={styles.heading}
